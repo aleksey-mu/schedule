@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
 
 import './index.scss';
+import 'antd/dist/antd.css';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 function App() {
-	return <div>Hello!</div>;
+	return (
+		<div>
+			<div>Hello!</div>
+		</div>
+	);
 }
 
 const AppWithHot = hot(module)(App);
