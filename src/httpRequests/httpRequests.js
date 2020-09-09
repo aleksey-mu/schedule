@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 
 const teamId = "group51";
-const baseURL = "rs-react-schedule.firebaseapp.com/api";
+const baseURL = "https://rs-react-schedule.firebaseapp.com/api";
 
 // requests for events
 
@@ -138,6 +138,20 @@ const deleteExistingOrganizerByID = async (baseURL, teamId, organizerId) => {
 };
 
 // export functions
+
+// const httpRequests = {
+//   getAllEvents,
+//   addNewEvent,
+//   getEventByID,
+//   updateExistingEventByID,
+//   deleteExistingEventByID,
+//   getAllOrganizers,
+//   addNewOrganizer,
+//   getOrganizerByID,
+//   updateExistingOrganizerByID,
+//   deleteExistingOrganizerByID,
+// };
+
 export default {
   getAllEvents,
   addNewEvent,
