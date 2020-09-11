@@ -1,0 +1,6 @@
+.container {
+  display: grid;
+  grid-area: sidebar;
+  grid-template-rows: 80px 35px 1fr;
+  background-color: #001529;
+}

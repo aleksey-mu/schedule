@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
-import { Button } from 'antd';
+// import { Button } from 'antd';
+import Header from './сomponents/Header/Header';
+import MainConteiner from './сomponents/MainConteiner/MainContainer';
+import SideBar from './сomponents/SideBar/SideBar';
 
-import './index.scss';
+import styles from './App.module.css';
 import 'antd/dist/antd.css';
 
 import 'core-js/stable';
@@ -11,9 +14,10 @@ import 'regenerator-runtime/runtime';
 
 function App() {
 	return (
-		<div>
-			<div>Hello!</div>
-			<Button type='primary'>Primary Button</Button>
+		<div className={styles.container}>
+			<SideBar />
+			<Header />
+			<MainConteiner />
 		</div>
 	);
 }

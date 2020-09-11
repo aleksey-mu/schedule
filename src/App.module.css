@@ -1,0 +1,13 @@
+.test {
+  color: blueviolet;
+  border-radius: 5px;
+}
+
+.container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-areas: 'sidebar header'
+                       'sidebar mainContainer';
+  grid-template-columns: 80px 1fr;
+  grid-template-rows: 80px 1fr;
+}
