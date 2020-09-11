@@ -9,11 +9,14 @@ import 'antd/dist/antd.css';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+import TaskCard from './components/task-card/TaskCard'
+
 function App() {
 	return (
 		<div>
 			<div>Hello!</div>
 			<Button type='primary'>Primary Button</Button>
+			<TaskCard />
 		</div>
 	);
 }
