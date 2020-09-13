@@ -5,13 +5,14 @@ import clsx from 'clsx';
 import styles from './Logo.module.css';
 
 import logoIcon from '../../../assets/images/logoIcon.svg';
-import logo from '../../../assets/images/logo.svg';
+import logo from '../../../assets/images/logo.png';
 
 const Logo = ({ type }) => {
-    const logoUrl = type === 'icon' ? logoIcon : logo;
+    const isIcon = type === 'icon';
+    const logoUrl = isIcon ? logoIcon : logo;
     return (
         <>
-        <div className={clsx(styles.logo, type)}>
+        <div className={clsx(styles.logo, type, 'logo')}>
             <img src={logoUrl} alt="RSSchool" />
         </div>
         </>

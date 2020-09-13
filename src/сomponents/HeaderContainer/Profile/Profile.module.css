@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.profileButton:global(.ant-dropdown-trigger) {
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  border-radius: 50%;
+  border: 1px solid #333;
+}
+
+.profileButton:global(.ant-dropdown-trigger) :global(.anticon) {
+  width: 100%;
+  height: 100%;
+}

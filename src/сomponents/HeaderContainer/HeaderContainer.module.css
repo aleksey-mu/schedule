@@ -1,0 +1,10 @@
+.container {
+  padding: 0 16px;
+}
+
+.container:global(.ant-layout-header) {
+  background-color: transparent;
+  height: unset;
+  padding: 0;
+  line-height: inherit;
+}

@@ -1,8 +1,17 @@
 @import '../../assets/style/palette.scss';
 
-.container {
-    display: grid;
-    grid-area: sidebar;
-    grid-template-rows: 80px 35px 1fr;
-    background-color: $Black-Main;
+// .container {
+//     display: grid;
+//     grid-area: sidebar;
+//     grid-template-rows: 80px 1fr;
+//     background-color: $Black-Main;
+// }
+.menuOutlined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 5px 0;
 }

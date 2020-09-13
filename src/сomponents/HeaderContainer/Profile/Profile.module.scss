@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    align-items: center;
+    
+    // :global(.ant-dropdown-trigger), 
+    // :global(.ant-dropdown-trigger.ant-dropdown-open) {
+    //     width: 32px;
+    //     height: 32px;
+    //     padding: 0;
+    //     background: url(/src/assets/images/icons/person.svg) 50% no-repeat;
+    //     background-size: 25px;
+    //     border-radius: 50%;
+    //     border: 1px solid #333;
+    //     .anticon-down {
+    //         right: -10px;
+    //         position: absolute;
+    //         bottom: 0;
+    //         width: unset;
+    //         height: unset;
+    //         font-size: 10px;
+    //     }
+    // }
+    // :global(.ant-dropdown-trigger .anticon-down)  {
+    //     right: -10px;
+    //     position: absolute;
+    //     bottom: 0;
+    //     width: unset;
+    //     height: unset;
+    //     font-size: 10px;
+    // }
+}
+.profileButton {
+    &:global(.ant-dropdown-trigger) {
+        width: 32px;
+        height: 32px;
+        padding: 5px;
+        border-radius: 50%;
+        border: 1px solid #333;
+        :global(.anticon) {
+            width: 100%;
+            height: 100%;
+        }
+    }    
+}

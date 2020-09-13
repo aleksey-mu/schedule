@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+}
+
+.container :global(.logo img) {
+  max-height: 30px;
+  margin: 0;
+}
