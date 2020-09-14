@@ -17,7 +17,7 @@ const ListMenu = ({ data }) => {
     return (
         <div className={styles.container}>
             <Menu 
-                defaultSelectedKeys={['1']}
+                defaultSelectedKeys={['3']}
                 defaultOpenKeys={['sub1']}
                 mode="inline"
                 theme="dark"
