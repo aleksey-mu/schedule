@@ -11,8 +11,9 @@
   grid-template-columns: 80px 1fr;
   grid-template-rows: 80px 1fr; 
 }*/
-@media screen and (max-width: 599px) {
-  .content {
+
+.content {
+  @media screen and (max-width: 599px) {
     min-width: 100%;
-  }
+  } 
 }

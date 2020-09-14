@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import styles from './Logo.module.css';
+import styles from './Logo.module.scss';
 
 import logoIcon from '../../../assets/images/logoIcon.svg';
 import logo from '../../../assets/images/logo.png';

@@ -23,7 +23,7 @@ const SideBar = () => {
     }
     return (
         <>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} trigger={null} >            
+        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} trigger={null} className={styles.container}>            
             <Logo type='icon'/>
             <div className={styles.menuOutlined}>
                 <MenuOutlined style={{ fontSize: '24px' }} className='trigger' onClick={onCollapse}/>

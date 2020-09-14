@@ -24,7 +24,7 @@ const HeaderContainer = () => {
                         <Logo />
                     </h1>  
                 </Col>
-                <Col flex="auto" style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
+                <Col flex="auto" style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end',  flexWrap: 'wrap'}}>
                     <Score scoreValue={scoreValue} />
                     <Profile personData={mockPersonData} role={role}/>
                 </Col>

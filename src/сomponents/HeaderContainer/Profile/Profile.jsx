@@ -21,8 +21,8 @@ const Profile = ({role, personData}) => {
 
     return (
         <div className={styles.container}>
-          <Space>
-            <Space>
+          <Space style={{flexWrap: 'wrap', justifyContent: 'flex-end'}}>
+            <Space style={{flexWrap: 'wrap', justifyContent: 'flex-end'}}>
               <strong>{role}:</strong>
               <span>{personData.name},</span>
             </Space>            

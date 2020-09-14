@@ -8,8 +8,10 @@
 }
 
 .menuItem {
-    white-space: pre-line;
-    line-height: 1!important;
+    &:global(.ant-menu-item) {
+        white-space: pre-line;
+        line-height: 1!important;
+    }    
 }
 
 :global(ul.ant-menu-root.ant-menu-inline-collapsed) li {
