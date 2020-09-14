@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import clsx from 'clsx';
 
 import './MenuIcon.scss';
@@ -11,7 +11,7 @@ const MenuIcon = ({ icon }) => {
 }
 
 MenuIcon.propTypes = {
-    icon: PropTypes.string,
+    icon: string,
 }
 
 MenuIcon.defaultProps = {

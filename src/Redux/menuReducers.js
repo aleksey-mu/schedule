@@ -2,15 +2,11 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import { createSlice } from '@reduxjs/toolkit';
 
-// export const toggleMenu = createAction('toggleMenu/toggle')
-
-const initialState = {
-    collapsed: true,
-};
-
-const toggleMenu = createSlice({
+const sliceMenu = createSlice({
     name: 'toggleMenu',
-    initialState,
+    initialState: {
+        collapsed: true,
+    },
     reducers: {
         toggleMenuSet: (state, action) => {
             const isCollapsed = action.payload;
@@ -19,7 +15,7 @@ const toggleMenu = createSlice({
     }
 })
 
-const { actions, reducer } = toggleMenu;
+const { actions, reducer } = sliceMenu;
 export const {
     toggleMenuSet
   } = actions;

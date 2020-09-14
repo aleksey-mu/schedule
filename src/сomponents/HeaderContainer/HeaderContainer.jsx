@@ -15,7 +15,6 @@ const mockPersonData = {
 
 const HeaderContainer = () => {
     const scoreValue = 3452;
-    const role = 'student';
     return (
         <Header className={styles.container}>
             <Row justify='space-between' >
@@ -26,7 +25,7 @@ const HeaderContainer = () => {
                 </Col>
                 <Col flex="auto" style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end',  flexWrap: 'wrap'}}>
                     <Score scoreValue={scoreValue} />
-                    <Profile personData={mockPersonData} role={role}/>
+                    <Profile personData={mockPersonData} />
                 </Col>
             </Row>
         </Header>

@@ -7,7 +7,7 @@ import {
     MenuOutlined
   } from '@ant-design/icons';
 import Logo from '../common/Logo/Logo';
-import { toggleMenuSet } from '../../Redux/reducers';
+import { toggleMenuSet } from '../../Redux/menuReducers';
 
 import styles from './TopHeader.module.scss';
 
@@ -15,11 +15,7 @@ const TopHeader = () => {
 
     const dispatch = useDispatch();
     const collapsed = useSelector(state => state.toggleMenu.collapsed);
-    // const [collapsed, setCollapsed] = useState(true);
     const onCollapse = () => {
-        // setCollapsed(bool);
-        // dispatch({type: 'toggleMenuSet', payload: bool});
-        // console.log(toggleMenuSet);
         dispatch(toggleMenuSet(!collapsed));
     }
     return (
@@ -33,16 +29,5 @@ const TopHeader = () => {
         </div>
     )
 } 
-
-// const mapStateToProps = (state) => {
-//   return {
-//     collapsedMenu: state.menu.collapsed
-//   }
-// }
-
-// export default connect(
-//     mapStateToProps,
-//     null
-//   )(TopHeader);
 
 export default TopHeader;

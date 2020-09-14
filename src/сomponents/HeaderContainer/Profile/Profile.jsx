@@ -1,40 +1,57 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Menu, Dropdown, Switch, Space } from 'antd';
-// import { DownOutlined } from '@ant-design/icons';
+import { shape } from 'prop-types';
 
 import ProfileIcon from '../../Icons/ProfileIcon';
 import styles from './Profile.module.scss';
+import { switchUserRole } from '../../../Redux/roleReducers';
 
-const Profile = ({role, personData}) => {
+const Profile = ({personData}) => {
+  const dispatch = useDispatch();
+  const userRole = useSelector(state => state.userRole.role);
 
-    const handleMenuClick = (e) => {
-        console.log('click', e);
-      }
+  const handleMenuClick = (e) => {
+      console.log('click', e);
+    }
 
-    const menu = (
-        <Menu onClick={handleMenuClick}>
-          <Menu.Item key="1">
-            <Switch checkedChildren="Mentor" unCheckedChildren="Student" defaultChecked />
-          </Menu.Item>
-        </Menu>
-      );
+  const handleChange = () => {
+    const roleToSet = userRole === "Student" ? "Mentor" : "Student";
+    dispatch(switchUserRole(roleToSet));
+  }
 
-    return (
-        <div className={styles.container}>
-          <Space style={{flexWrap: 'wrap', justifyContent: 'flex-end'}}>
-            <Space style={{flexWrap: 'wrap', justifyContent: 'flex-end'}}>
-              <strong>{role}:</strong>
-              <span>{personData.name},</span>
-            </Space>            
-            <span>@{personData.github}</span>
-            <Dropdown overlay={menu}>
-                  <Button type="text" size='small' className={styles.profileButton}>
-                      <ProfileIcon />
-                  </Button>
-              </Dropdown>
-          </Space>
-        </div>
+  const menu = (
+      <Menu onClick={handleMenuClick}>
+        <Menu.Item key="1">
+          <Switch checkedChildren="Mentor" unCheckedChildren="Student" defaultChecked onChange={handleChange}/>
+        </Menu.Item>
+      </Menu>
     );
+
+  return (
+      <div className={styles.container}>
+        <Space style={{flexWrap: 'wrap', justifyContent: 'flex-end'}}>
+          <Space style={{flexWrap: 'wrap', justifyContent: 'flex-end'}}>
+            <strong>{userRole}:</strong>
+            <span>{personData.name},</span>
+          </Space>            
+          <span>@{personData.github}</span>
+          <Dropdown overlay={menu}>
+                <Button type="text" size='small' className={styles.profileButton}>
+                    <ProfileIcon />
+                </Button>
+            </Dropdown>
+        </Space>
+      </div>
+  );
 }
+
+Profile.propTypes = {
+  personData: shape,
+}
+
+Profile.defaultProps = {
+  personData: null,
+};
 
 export default Profile;

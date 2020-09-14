@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import clsx from 'clsx';
 
 import styles from './Logo.module.scss';
@@ -20,7 +20,7 @@ const Logo = ({ type }) => {
 }
 
 Logo.propTypes = {
-    type: PropTypes.string,
+    type: string,
 }
 
 Logo.defaultProps = {

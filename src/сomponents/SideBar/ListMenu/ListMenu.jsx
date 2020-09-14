@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { shape, arrayOf } from 'prop-types';
 import { Menu } from 'antd';
 
 import MenuIcon from './MenuIcon/MenuIcon';
@@ -29,13 +29,13 @@ const ListMenu = ({ data }) => {
 }
 
 ListMenu.propTypes = {
-    data: PropTypes.shape({
-        dataMenuItems: PropTypes.arrayOf(PropTypes.shape)
+    data: shape({
+        dataMenuItems: arrayOf(shape)
     }),
 }
 
 ListMenu.defaultProps = {
-    data: {},
+    data: null,
 };
 
 export default ListMenu;

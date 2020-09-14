@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { configureStore } from "@reduxjs/toolkit";
-import toggleMenuReducer from "./Redux/reducers";
+import toggleMenuReducer from "./Redux/menuReducers";
+import roleReducer from "./Redux/roleReducers";
 
 import App from './App';
 import 'antd/dist/antd.css';
@@ -13,7 +14,8 @@ import 'regenerator-runtime/runtime';
 
 const store = configureStore({
 	reducer: {
-		toggleMenu: toggleMenuReducer
+		toggleMenu: toggleMenuReducer,
+		userRole: roleReducer
 	},
 });
 

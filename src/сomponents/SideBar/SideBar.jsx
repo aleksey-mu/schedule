@@ -9,16 +9,14 @@ import styles from './SideBar.module.scss';
 import Logo from '../common/Logo/Logo';
 import dataMenuItems from '../../dataSourсe/data';
 import ListMenu from './ListMenu/ListMenu';
-import { toggleMenuSet } from '../../Redux/reducers';
+import { toggleMenuSet } from '../../Redux/menuReducers';
 
 const { Sider } = Layout;
 
 const SideBar = () => {
-    // const [collapsed, setCollapsed] = useState(true);
     const dispatch = useDispatch();
     const collapsed = useSelector(state => state.toggleMenu.collapsed);
     const onCollapse = () => {
-        // setCollapsed(bool);
         dispatch(toggleMenuSet(!collapsed));
     }
     return (
