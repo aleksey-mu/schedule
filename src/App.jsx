@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
 import { Layout} from 'antd';
 import clsx from 'clsx';
 
@@ -11,7 +12,7 @@ import styles from './App.module.scss';
 
 const App = () => {
 	return (
-		<>
+		<Router>
 		<TopHeader />
 		<Layout style={{ minHeight: '100vh' }}>			
 			<SideBar />
@@ -20,7 +21,7 @@ const App = () => {
 				<MainConteiner />
 			</Layout>		 	
 		</Layout>
-		</>
+		</Router>
 	);
 }
 

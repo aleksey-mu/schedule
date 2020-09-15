@@ -2,7 +2,7 @@ export default {
     dataMenuItems: [
         {id: 1, title: "Dashboard", url: "#", icon: "dash"},
         {id: 2, title: "Score", url: "#", icon: "score"},
-        {id: 3, title: "Schedule", url: "#", icon: "schedule"},
+        {id: 3, title: "Schedule", url: "/", icon: "schedule"},
         {id: 4, title: "Cross-Check: Submit", url: "#", icon: "submit"},
         {id: 5, title: "Cross-Check: Review", url: "#", icon: "review"},
         {id: 6, title: "Interviews", url: "#", icon: "interviews"},

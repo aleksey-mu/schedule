@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { shape, arrayOf } from 'prop-types';
 import { Menu } from 'antd';
 
@@ -10,7 +11,7 @@ const ListMenu = ({ data }) => {
     const menuItem = dataMenuItems.map(item => {
         return (           
                 <Menu.Item key={item.id} icon={<MenuIcon icon={item.icon}/>} className={styles.menuItem}>
-                    {item.title}
+                    <Link to={item.url}>{item.title}</Link>
                 </Menu.Item>            
         );
     })
