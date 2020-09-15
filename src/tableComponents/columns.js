@@ -48,10 +48,19 @@ const columns = [
     dataIndex: "descriptionUrl",
     key: "descriptionUrl",
     render: (descriptionUrl) => (
-      <a onClick={(e) => console.log(e.target.href)} target="blank" href={descriptionUrl}>
+      <a
+        onClick={(e) => console.log(e.target.href)}
+        target="blank"
+        href={descriptionUrl}
+      >
         {descriptionUrl}
       </a>
     ),
+  },
+  {
+    title: "Time to complete",
+    dataIndex: "timeToComplete",
+    key: "timeToComplete",
   },
   {
     title: "Comment",
@@ -69,6 +78,18 @@ const columns = [
     key: "place",
   },
   {
+    title: "Подробнее",
+    dataIndex: "id",
+    key: "id",
+    render: (id) => {
+        return (
+          <button data-id={id} key={id} onClick={logNode} type="button">
+            Подробнее
+          </button>
+        );
+      },
+  },  
+  {
     title: "Обновить запись",
     dataIndex: "id",
     key: "id",
@@ -82,25 +103,22 @@ const columns = [
   },
 ];
 
-
 const teamId = "group51";
 const baseURL = "https://rs-react-schedule.firebaseapp.com/api";
 
-
 async function getEventByID(baseURL, teamId, eventId) {
-    const getEventByIDURL = `/team/${teamId}/event/${eventId}`;
-    const response = await fetch(baseURL + getEventByIDURL);
-    const data = await response.json();
-  
-    return data;
-  }
+  const getEventByIDURL = `/team/${teamId}/event/${eventId}`;
+  const response = await fetch(baseURL + getEventByIDURL);
+  const data = await response.json();
 
-async function logNode(e){
-    const id = e.target.getAttribute('data-id') - 1
-    console.log(tableData[id])
-    const response = await getEventByID(baseURL, teamId, id)
-    console.log(response)
+  return data;
 }
 
+async function logNode(e) {
+  const id = e.target.getAttribute("data-id") - 1;
+  console.log(tableData[id]);
+  const response = await getEventByID(baseURL, teamId, id);
+  console.log(response);
+}
 
 export default columns;
