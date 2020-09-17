@@ -9,8 +9,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/jsx-filename-extension */
 
-import React from "react";
+import React, { useState } from "react";
 import { tableData } from "./tableData";
+// import CardComponentHOC from '../card-components/hoc/cardComponentHOC';
+import TaskCard from '../card-components/task-card/TaskCard';
+
+
 
 const columns = [
   {
@@ -82,10 +86,28 @@ const columns = [
     dataIndex: "id",
     key: "id",
     render: (id) => {
+      const dataRow = tableData[id-1]
+      
+      const [showModal, setShowModal] = useState(false)
+
         return (
-          <button data-id={id} key={id} onClick={logNode} type="button">
+          <div>
+          <button 
+              data-row={dataRow} 
+              data-id={id} 
+              key={id} 
+              onClick={() => {
+                setShowModal((prev => !prev));
+                console.log(showModal)
+                console.log(id)
+              }} 
+              type="button"
+          >
             Подробнее
-          </button>
+          </button>          
+          {showModal && <TaskCard/>}
+          </div>
+          
         );
       },
   },  
@@ -94,8 +116,9 @@ const columns = [
     dataIndex: "id",
     key: "id",
     render: (id) => {
+      const dataRow = tableData[id-1]
       return (
-        <button data-id={id} key={id} onClick={logNode} type="button">
+        <button data-row={dataRow}  data-id={id} key={id} onClick={logNode} type="button">
           Обновить запись
         </button>
       );
@@ -116,7 +139,8 @@ async function getEventByID(baseURL, teamId, eventId) {
 
 async function logNode(e) {
   const id = e.target.getAttribute("data-id") - 1;
-  console.log(tableData[id]);
+  const dataRow = e.target.getAttribute("data-row");
+  console.dir(tableData[id], dataRow);
   const response = await getEventByID(baseURL, teamId, id);
   console.log(response);
 }

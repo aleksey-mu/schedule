@@ -10,7 +10,8 @@ export const tableData = [
         "description": "Stage#1 Intro",
         "comment": "Дмитрий Воробей, Сергей Шаляпин",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "2",
@@ -20,7 +21,8 @@ export const tableData = [
         "name": "https://www.youtube.com/rollingscopesschool",
         "descriptionUrl": "https://www.youtube.com/rollingscopesschool",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "3",
@@ -31,7 +33,8 @@ export const tableData = [
         "descriptionUrl": "https://ru.code-basics.com/languages/html",
         "timeToComplete": "8h",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "4",
@@ -42,7 +45,8 @@ export const tableData = [
         "descriptionUrl": "https://ru.code-basics.com/languages/css",
         "timeToComplete": "8h",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "5",
@@ -53,7 +57,8 @@ export const tableData = [
         "descriptionUrl": "https://ru.code-basics.com/languages/javascript",
         "timeToComplete": "20h",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "6",
@@ -63,7 +68,8 @@ export const tableData = [
         "name": "Browsers and IDEs",
         "descriptionUrl": "https://www.youtube.com/watch?v=nd2VYxOsOwY&t=",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "7",
@@ -73,7 +79,8 @@ export const tableData = [
         "name": "HTML and CSS Basics",
         "descriptionUrl": "https://youtu.be/2iCgf03rx1I",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "8",
@@ -83,7 +90,8 @@ export const tableData = [
         "name": "HTML & CSS - Building first simple page",
         "descriptionUrl": "https://youtu.be/B0RuI1L5r9Q",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-06 12:00:00"
     },
     {
         "id": "9",
@@ -94,7 +102,8 @@ export const tableData = [
         "descriptionUrl": "https://www.youtube.com/watch?v=pQ0hr5U8RL0",
         "comment": "RSSchool Crew",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-08 19:00:00"
     },
     {
         "id": "10",
@@ -105,6 +114,7 @@ export const tableData = [
         "descriptionUrl": "https://www.youtube.com/c/Luffi2539/live",
         "comment": "Виктор Ковалев",
         "timeZone": "UTC +3 MSK Minsk",
-        "place": "online"
+        "place": "online",
+        "dateTime": "2020-09-12 19:00:00"
     },
 ]

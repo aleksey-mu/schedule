@@ -5,7 +5,6 @@ import AddToCalendarTask from './templates/AddToCalendarTask'
 import AddToFavoritesTask from './templates/AddToFavoritesTask'
 
 
-
 import './styles/taskCard.scss'
 
 const TaskCard = ({ taskTitle, lastChange, changeReason, taskDescription }) => {
