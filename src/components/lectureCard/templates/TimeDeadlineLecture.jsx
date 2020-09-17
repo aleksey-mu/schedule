@@ -9,7 +9,6 @@ const TimeDeadlineLecture = ({ time }) => {
                 <DatePicker 
                     showTime 
                     allowClear={false}
-                    disabled="true"
                     defaultValue={moment(`${time}`, 'YYYY-MM-DD HH:mm' )}
                 />
         </Space>
