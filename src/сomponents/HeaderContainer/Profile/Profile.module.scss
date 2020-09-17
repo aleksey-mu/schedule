@@ -36,9 +36,13 @@
         padding: 5px;
         border-radius: 50%;
         border: 1px solid #333;
+        &:hover,
+        &:focus  {
+            border-color: inherit;
+        }
         :global(.anticon) {
             width: 100%;
             height: 100%;
         }
-    }    
+    }
 }

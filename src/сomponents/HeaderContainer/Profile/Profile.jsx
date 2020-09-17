@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Menu, Dropdown, Switch, Space } from 'antd';
 import { shape } from 'prop-types';
@@ -10,6 +10,11 @@ import { switchUserRole } from '../../../Redux/roleReducers';
 const Profile = ({personData}) => {
   const dispatch = useDispatch();
   const userRole = useSelector(state => state.userRole.role);
+  const userRoleLocalStorage = localStorage.getItem('appRSSchoolRole');
+
+  useEffect(() => {
+    dispatch(switchUserRole(userRoleLocalStorage));
+  }, [userRoleLocalStorage])
 
   const handleMenuClick = (e) => {
       console.log('click', e);
@@ -17,13 +22,14 @@ const Profile = ({personData}) => {
 
   const handleChange = () => {
     const roleToSet = userRole === "Student" ? "Mentor" : "Student";
+    localStorage.setItem('appRSSchoolRole', roleToSet);
     dispatch(switchUserRole(roleToSet));
   }
 
   const menu = (
       <Menu onClick={handleMenuClick}>
         <Menu.Item key="1">
-          <Switch checkedChildren="Mentor" unCheckedChildren="Student" defaultChecked onChange={handleChange}/>
+          <Switch checkedChildren="Student" unCheckedChildren="Mentor" defaultChecked={userRole === "Student"} onChange={handleChange}/>
         </Menu.Item>
       </Menu>
     );
