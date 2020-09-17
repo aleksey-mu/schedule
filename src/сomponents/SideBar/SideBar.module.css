@@ -1,0 +1,36 @@
+@media screen and (max-width: 599px) {
+  .container :global(.logo.icon) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .container :global(.ant-menu-inline-collapsed) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .container:global(.ant-layout-sider-collapsed) {
+    flex: 0 0 0px !important;
+    max-width: 0px !important;
+    min-width: 0px !important;
+    width: 0px !important;
+  }
+}
+
+.menuOutlined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  padding: 5px 0;
+}
+
+@media screen and (max-width: 599px) {
+  .menuOutlined {
+    display: none;
+  }
+}

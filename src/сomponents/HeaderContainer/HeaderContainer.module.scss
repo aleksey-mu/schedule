@@ -1,0 +1,16 @@
+.container {
+  :global(.ant-row-space-between) {
+    flex-wrap: nowrap;
+  }
+  &:global(.ant-layout-header) {
+    background-color: transparent;
+    height: unset;
+    padding: 10px 16px;
+    line-height: inherit;
+  }
+  :global(.ant-col:first-child) {
+    @media screen and (max-width: 599px) {
+      display: none;
+    }
+  }
+}

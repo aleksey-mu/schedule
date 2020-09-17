@@ -1,0 +1,8 @@
+.menuicon {
+    &:global(.anticon) {
+        width: 40px;
+        min-width: 40px!important;
+        height: 40px;    
+        border-radius: 50%;
+    }
+}

@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+    display: none;
+  }
+}
+
+.container :global(.logo img) {
+  max-height: 30px;
+  margin: 0;
+}
