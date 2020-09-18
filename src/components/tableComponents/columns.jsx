@@ -9,10 +9,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/jsx-filename-extension */
 
-import React, { useState } from "react";
+import React from "react";
+import { Button } from "antd";
 import { tableData } from "./tableData";
 // import CardComponentHOC from '../card-components/hoc/cardComponentHOC';
-import TaskCard from '../card-components/task-card/TaskCard';
+// import TaskCard from '../card-components/task-card/TaskCard';
+import ShowMore from "./showMore";
 
 
 
@@ -86,28 +88,9 @@ const columns = [
     dataIndex: "id",
     key: "id",
     render: (id) => {
-      const dataRow = tableData[id-1]
-      
-      const [showModal, setShowModal] = useState(false)
 
         return (
-          <div>
-          <button 
-              data-row={dataRow} 
-              data-id={id} 
-              key={id} 
-              onClick={() => {
-                setShowModal((prev => !prev));
-                console.log(showModal)
-                console.log(id)
-              }} 
-              type="button"
-          >
-            Подробнее
-          </button>          
-          {showModal && <TaskCard/>}
-          </div>
-          
+          <ShowMore id = {id} />
         );
       },
   },  
@@ -118,9 +101,9 @@ const columns = [
     render: (id) => {
       const dataRow = tableData[id-1]
       return (
-        <button data-row={dataRow}  data-id={id} key={id} onClick={logNode} type="button">
+        <Button data-row={dataRow}  data-id={id} key={id} onClick={logNode} type="button">
           Обновить запись
-        </button>
+        </Button>
       );
     },
   },

@@ -1,2 +1,18 @@
-@import './taskCard/common.scss';
-@import './taskCard/block.scss';
+@import "./taskCard/common.scss";
+@import "./taskCard/block.scss";
+
+
+//
+.task-card-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+//
