@@ -5,7 +5,15 @@ export default async function deleteExistingOrganizerByID(
   organizerId
 ) {
   const deleteExistingOrganizerByIDURL = `/team/${teamId}/organizer/${organizerId}`;
-  const response = await fetch(baseURL + deleteExistingOrganizerByIDURL);
+  const response = await fetch(baseURL + deleteExistingOrganizerByIDURL, {
+    method: "DELETE",
+    withCredentials: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    
+  });
   const data = await response.json();
 
   return data;

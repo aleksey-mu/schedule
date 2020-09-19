@@ -8,7 +8,7 @@ const baseURL = "https://rs-react-schedule.firebaseapp.com/api";
 // requests for events
 
 // get all existing events from DB
-const getAllEvents = async (baseURL, teamId) => {
+export const getAllEvents = async (baseURL, teamId) => {
   const getAllEventsURL = `/team/${teamId}/events`;
   const response = await fetch(baseURL + getAllEventsURL);
   const data = await response.json();
@@ -60,9 +60,36 @@ const updateExistingEventByID = async (baseURL, teamId, body, eventId) => {
 };
 
 // delete existing event by ID from DB
-const deleteExistingEventByID = async (baseURL, teamId, eventId) => {
+export const deleteExistingEventByID = async (baseURL, teamId, eventId) => {
+  console.log(eventId)
   const deleteExistingEventByIDURL = `/team/${teamId}/event/${eventId}`;
-  const response = await fetch(baseURL + deleteExistingEventByIDURL);
+  const response = await fetch(baseURL + deleteExistingEventByIDURL, {
+    method: "DELETE",
+    withCredentials: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    
+  });
+  const data = await response.json();
+
+  return data;
+};
+
+// delete all events from DB
+const deleteAllEvents = async (baseURL, teamId, eventId) => {
+  console.log(eventId)
+  const deleteExistingEventByIDURL = `/team/${teamId}/event/${eventId}`;
+  const response = await fetch(baseURL + deleteExistingEventByIDURL, {
+    method: "DELETE",
+    withCredentials: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    
+  });
   const data = await response.json();
 
   return data;
@@ -131,7 +158,15 @@ const updateExistingOrganizerByID = async (
 // delete existing organizer by ID from DB
 const deleteExistingOrganizerByID = async (baseURL, teamId, organizerId) => {
   const deleteExistingOrganizerByIDURL = `/team/${teamId}/organizer/${organizerId}`;
-  const response = await fetch(baseURL + deleteExistingOrganizerByIDURL);
+  const response = await fetch(baseURL + deleteExistingOrganizerByIDURL, {
+    method: "DELETE",
+    withCredentials: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    
+  });
   const data = await response.json();
 
   return data;
@@ -158,6 +193,7 @@ export default {
   getEventByID,
   updateExistingEventByID,
   deleteExistingEventByID,
+  deleteAllEvents,
   getAllOrganizers,
   addNewOrganizer,
   getOrganizerByID,
