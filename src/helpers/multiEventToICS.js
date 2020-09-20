@@ -91,6 +91,6 @@ const createICSEvents = (eventsData) => {
 
 export default function yes() {
 	createICSEvents(data);
-}
+} // убрать это и импортить createICSEvent, в которую подставить данные
 
 // export default createICSEvent;
