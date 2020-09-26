@@ -1,8 +1,8 @@
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from "react";
-import TaskCard from "../card-components/task-card/TaskCard";
 import { tableData } from "./tableData";
+import ChangeTaskCard from "../changeTaskCard/changeTaskCard";
 
 export default function ShowMore(props) {
 
@@ -12,25 +12,20 @@ export default function ShowMore(props) {
 
   const [showModal, setShowModal] = useState(false)
 
-  function toggleVisibility(){
-      
-    setShowModal((prev) => !prev);
-    console.log(showModal);
-    console.log(id);
-  }
-
   return (
     <div>
-      <Button
-        data-row={dataRow}
-        data-id={id}
-        key={id}
-        onClick={toggleVisibility}
-        type="button"
-      >
+      <Button type="button" onClick={() => setShowModal(!showModal)}>
         Подробнее
       </Button>
-      {showModal && <TaskCard toggleVisibility={toggleVisibility} />}
+      <Modal
+        visible={showModal}
+        onOk={() => setShowModal(!showModal)}
+        onCancel={() => setShowModal(!showModal)}
+        width="auto"
+        closable="false"
+      >
+        <ChangeTaskCard dataTask={dataRow}/>
+      </Modal>
     </div>
   );
 }

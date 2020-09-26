@@ -1,0 +1,120 @@
+
+.task-card-title-block {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 10%;
+    border-bottom: 1px solid rgba(180, 176, 176, 0.377);
+}
+
+.task-card-title {
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.task-card-block {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 4px 4px 11px -7px rgba(0,0,0,0.75);
+    height: 100%;
+    padding: 10px 20px;
+    min-width: 600px;
+    max-width: 600px;
+}
+
+.feedback {
+    margin-top: 15px;
+}
+
+.task-card-data-block {
+    min-height: 186px;
+    border-bottom: 1px solid rgba(180, 176, 176, 0.377);
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.task-card-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-card-description-block {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+}
+
+.task-card-description-title {
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.hint {
+    color: blue;
+    font-size: 14px;
+    vertical-align: top;
+    font-weight: 400;  
+}
+
+.type {
+    border-radius: 3px;
+    padding: 1px 4px;
+    margin-left: 5px;
+}
+
+.wrapper-type {
+    margin-top: 10px;
+}
+
+.image {
+    width: 70%;
+    margin: 0 15%;
+}
+
+.mapboxgl-ctrl-geocoder {
+    width: auto;
+}
+
+.type {
+    border-radius: 3px;
+    padding: 1px 4px;
+}
+
+.green {
+    border: 1px solid #b7eb8f;
+    color: #52c41a;
+}
+
+.lecture {
+    color: white;
+    background-color: blue;
+}
+
+.test-color {
+    color: white;
+    background-color: rgb(99, 171, 145);
+}
+
+.white {
+    border: 1px solid black;
+    color: black;
+}
+
+.input-color {
+    width: 22px;
+}
+
+@media (max-width: 860px) {
+    .task-card-wrapper {
+        flex-direction: column-reverse;
+    }
+}
