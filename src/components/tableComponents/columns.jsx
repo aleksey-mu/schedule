@@ -10,13 +10,22 @@
 /* eslint-disable react/jsx-filename-extension */
 
 import React from "react";
-import { tableData } from "./tableData";
+
+import ShowMore from "./showMore";
+
+function ReduceText({ text, type }) {
+  let length = 15;
+  if (type === "long") {
+    length = 40;
+  }
+  return <span>{text.length > length ? `${text.slice(0,length)}...` : text}</span>;
+}
 
 const columns = [
   {
     title: "№",
-    dataIndex: "id",
-    key: "id",
+    dataIndex: "index",
+    key: "index",
   },
   {
     title: "Date",
@@ -32,6 +41,11 @@ const columns = [
     title: "Type",
     dataIndex: "type",
     key: "type",
+    render: (type) => {
+        return (
+          <span>{type}</span>
+        );
+      },
   },
   {
     title: "Name",
@@ -42,6 +56,9 @@ const columns = [
     title: "Description",
     dataIndex: "description",
     key: "description",
+    render: (description) => (
+      <ReduceText text={description} type="long"/>
+    )
   },
   {
     title: "Link",
@@ -53,7 +70,7 @@ const columns = [
         target="blank"
         href={descriptionUrl}
       >
-        {descriptionUrl}
+        <ReduceText text={descriptionUrl}/>
       </a>
     ),
   },
@@ -66,6 +83,9 @@ const columns = [
     title: "Comment",
     dataIndex: "comment",
     key: "comment",
+    render: (comment) => (
+      <ReduceText text={comment} type="long"/>
+    )
   },
   {
     title: "TimeZone",
@@ -79,46 +99,15 @@ const columns = [
   },
   {
     title: "Подробнее",
-    dataIndex: "id",
-    key: "id",
-    render: (id) => {
+    dataIndex: "data",
+    key: "data",
+    render: (data) => {
+
         return (
-          <button data-id={id} key={id} onClick={logNode} type="button">
-            Подробнее
-          </button>
+          <ShowMore data = {data} />
         );
       },
   },  
-  {
-    title: "Обновить запись",
-    dataIndex: "id",
-    key: "id",
-    render: (id) => {
-      return (
-        <button data-id={id} key={id} onClick={logNode} type="button">
-          Обновить запись
-        </button>
-      );
-    },
-  },
 ];
-
-const teamId = "group51";
-const baseURL = "https://rs-react-schedule.firebaseapp.com/api";
-
-async function getEventByID(baseURL, teamId, eventId) {
-  const getEventByIDURL = `/team/${teamId}/event/${eventId}`;
-  const response = await fetch(baseURL + getEventByIDURL);
-  const data = await response.json();
-
-  return data;
-}
-
-async function logNode(e) {
-  const id = e.target.getAttribute("data-id") - 1;
-  console.log(tableData[id]);
-  const response = await getEventByID(baseURL, teamId, id);
-  console.log(response);
-}
 
 export default columns;
