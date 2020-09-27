@@ -1,14 +1,9 @@
 import { Button, Modal } from "antd";
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from "react";
-import { tableData } from "./tableData";
 import ChangeTaskCard from "../changeTaskCard/changeTaskCard";
 
-export default function ShowMore(props) {
-
-    const {id} = props;
-    const dataRow = tableData[id - 1];
-
+export default function ShowMore({data}) {
 
   const [showModal, setShowModal] = useState(false)
 
@@ -21,10 +16,11 @@ export default function ShowMore(props) {
         visible={showModal}
         onOk={() => setShowModal(!showModal)}
         onCancel={() => setShowModal(!showModal)}
-        width="auto"
+        width="fit-content"
         closable="false"
+        style={{ top: 10, left: 0 }}
       >
-        <ChangeTaskCard dataTask={dataRow}/>
+        <ChangeTaskCard dataTask={data}/>
       </Modal>
     </div>
   );

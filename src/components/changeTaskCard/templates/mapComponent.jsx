@@ -34,6 +34,32 @@ const MapComponent = (data) => {
     [handleViewportChange]
   );
 
+  function changeLatitude(value) {
+    if (+value >= -90 && +value <= 90) {
+      const valueLatitude = Number(value);
+      setViewport({...viewport, latitude: valueLatitude})
+      setLongitude(valueLatitude);
+    }
+  }
+
+  function changeLongitude(event) {
+    const value = Number(event.target.value);
+    setViewport({...viewport, longitude: value})
+    setLatitude(value);
+  }
+
+  function deleteMap() {
+    setLatitude(0);
+    setLongitude(0);
+    setIsMap(false)
+  }
+
+  function checkValue(event) {
+    if ("1234567890.".indexOf(event.key) === -1) {
+      event.preventDefault();
+    }
+  }
+
   return (
     <div>
       { isMap &&
@@ -43,12 +69,14 @@ const MapComponent = (data) => {
             <div>
               <span className="hint">Введите координаты в поля ниже чтобы отметить место встречи на карте</span> 
               <Input 
+                onKeyPress={(event) => checkValue(event)}
                 placeholder="поле для широты"
-                onChange={(event) => setViewport({...viewport, latitude: Number(event.target.value)})}
+                onChange={(event) => changeLatitude(event.target.value)}
               />
               <Input 
+                onKeyPress={(event) => checkValue(event)}
                 placeholder="поле для долготы"
-                onChange={(event) => setViewport({...viewport, longitude: Number(event.target.value)})}
+                onChange={(event) => changeLongitude(event)}
               />
               <p className="hint">Или вы можете ввести адрес в поле ниже чтобы отметить место встречи на карте</p>
             </div>
@@ -76,10 +104,10 @@ const MapComponent = (data) => {
             }
           </MapGL>
           <p>широта: {latitude.toFixed(3)}; долгота: {longitude.toFixed(3)} </p>
-          <Button onClick={() => setIsMap(!isMap)}>Убрать карту</Button>
+          { isEdit && <Button onClick={() => deleteMap()}>Убрать карту</Button> }
         </div>
         || isEdit && type === "offline" &&
-          <Button onClick={() => setIsMap(!isMap)}>Добавить карту</Button>
+          <Button onClick={() => setIsMap(true)}>Добавить карту</Button>
       }
     </div>
   );

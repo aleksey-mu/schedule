@@ -12,10 +12,12 @@ const AdditionItem = (props) => {
         break;
         case 'image': baseInfo = <img className='image' src={value} alt='картинка для задания'/>;
         break;
+        case 'comment': baseInfo = value;
+        break;
         case 'video': baseInfo = <iframe 
                                     title="video" 
-                                    width="430" 
-                                    height="260" 
+                                    width="80%" 
+                                    height="260px" 
                                     src={`https://www.youtube.com/embed/${value.replace(/https:\/\/www.youtube.com\/watch\?v=|https:\/\/youtu.be\//, '')}`} 
                                     frameBorder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 

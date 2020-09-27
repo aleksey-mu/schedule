@@ -1,6 +1,5 @@
 
 .task-card-title-block {
-    display: flex;
     justify-content: flex-start;
     align-items: center;
     height: 10%;
@@ -113,8 +112,40 @@
     width: 22px;
 }
 
+.user {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: white;
+}
+
+.ant-modal {
+    margin: 0;
+}
+
+.ant-modal-body {
+    padding-top: 40px;
+}
+
+.list-columns {
+    width: fit-content;
+    display: inline-block;
+    margin-right: 20px;
+}
+
 @media (max-width: 860px) {
     .task-card-wrapper {
         flex-direction: column-reverse;
+    }
+
+    .task-card-block {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 660px) {
+    .task-card-time {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
-import { Button, Input } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import { StarOutlined, StarFilled } from '@ant-design/icons';
 import moment from 'moment';
 import TimeDeadline from './templates/TimeDeadlineTask';
@@ -8,107 +8,134 @@ import AdditionItem from './templates/additionItem';
 import BasicItem from './templates/basicItem';
 import TypeComponent from './templates/typeComponent';
 import MapComponent from './templates/mapComponent';
+import updateExistingEventByID from '../../actions/httpRequests/updateExistingEventByID';
 
 import './styles/taskCard.scss';
 
-let currentIsFavorite = false;
-let currentTaskTitle = '';
-let currentLastChange = 'таск не изменяли';
-let currentChangeReason = '';
-let currentTaskDescription = '';
-let currentLink = '';
-let currentType = '';
-let currentTime = '2020-01-01 23:59';
-let currentImage = '';
-let currentFeedback = true;
-let currentVideo = '';
-let currentLatitude = 0;
-let currentLongitude = 0;
-let currentColorText = 'black';
-let currentColorBackground = 'white';
+
 
 const defaultData = {
-    name: currentTaskTitle,
-    saveLastChange: currentLastChange,
-    saveChangeReason: currentChangeReason, 
-    description: currentTaskDescription, 
-    descriptionUrl: currentLink, 
-    isFavorite: currentIsFavorite,
-    type: currentType,
-    dateTime: currentTime,
-    saveImage: currentImage,
-    saveFeedback: currentFeedback,
-    saveVideo: currentVideo,
-    saveLatitude: currentLatitude,
-    saveLongitude: currentLongitude,
-    saveColorText: currentColorText,
-    saveColorBackground: currentColorBackground,
+    name: '',
+    saveLastChange: '',
+    saveChangeReason: '', 
+    description: '', 
+    descriptionUrl: '', 
+    isFavorite: false,
+    type: '',
+    dateTime: '',
+    saveImage: '',
+    saveFeedback: false,
+    saveVideo: '',
+    saveLatitude: 0,
+    saveLongitude: 0,
+    saveColorText: '',
+    saveColorBackground: '',
+    comment: '',
+    allFeedbacks: [],
+    user: "student",
 }
 
 const ChangeTaskCard = ({ dataTask }) => {
     const { name, saveLastChange, saveChangeReason, description, descriptionUrl, 
         isFavorite, dateTime, saveImage, type, saveFeedback, saveVideo, saveLatitude,
-	saveLongitude, saveColorText, saveColorBackground } = defaultData && dataTask;
+        saveLongitude, comment, user, saveColorBackground, saveColorText,
+        allFeedbacks } = defaultData && dataTask;
     const [isEdit, setIsEdit] = useState(false);
-    const [lastChange, setLastChange] = useState(saveLastChange || currentLastChange);
-    const [taskDescription, setTaskDescription] = useState(description || currentTaskDescription);
-    const [taskTitle, setTaskTitle] = useState(name || currentTaskTitle);
-    const [changeReason, setChangeReason] = useState(saveChangeReason || currentChangeReason);
-    const [link, setLink] = useState(descriptionUrl || currentLink);
-    const [image, setImage] = useState(saveImage || currentImage);
-    const [time, setTime] = useState(dateTime || currentTime);
-    const [taskType, setType] = useState(type || currentType);
-    const [feedback, setFeedback] = useState(saveFeedback || currentFeedback);
-    const [latitude, setLatitude] = useState(saveLatitude || currentLatitude);
-    const [longitude, setLongitude] = useState(saveLongitude || currentLongitude);
-    const [video, setVideo] = useState(saveVideo || saveVideo);
-    const [colorText, setColorText] = useState(saveColorText || currentColorText);
-    const [colorBackground, setColorBackground] = useState(saveColorBackground || currentColorBackground);
+    const [lastChange, setLastChange] = useState(saveLastChange || '');
+    const [taskDescription, setTaskDescription] = useState(description || '');
+    const [taskTitle, setTaskTitle] = useState(name || '');
+    const [changeReason, setChangeReason] = useState(saveChangeReason || '');
+    const [link, setLink] = useState(descriptionUrl || '');
+    const [image, setImage] = useState(saveImage || '');
+    const [time, setTime] = useState(dateTime || '');
+    const [taskType, setType] = useState(type || '');
+    const [feedback, setFeedback] = useState(saveFeedback || false);
+    const [latitude, setLatitude] = useState(saveLatitude || 0);
+    const [longitude, setLongitude] = useState(saveLongitude || 0);
+    const [video, setVideo] = useState(saveVideo || '');
+    const [colorText, setColorText] = useState(saveColorText || 'black');
+    const [colorBackground, setColorBackground] = useState(saveColorBackground || 'white');
     const [status, setStatus] = useState(isFavorite || false);
-    const [user, setUser] = useState("student");
+    const [editComment, setEditComment] = useState(comment || '');
+    const [showModal, setShowModal] = useState(false);
+    const [allFeedbacksText, setAllFeedbacksText] = useState(allFeedbacks || []);
 
     const [isLink, setIsLink] = useState(link);
     const [isDescription, setIsDescription] = useState(taskDescription);
     const [isImage, setIsImage] = useState(image);
     const [isVideo, setIsVideo] = useState(video);
-    const [isMap, setIsMap] = useState(false);
+    const [isMap, setIsMap] = useState((saveLatitude || saveLatitude) > 0);
     const [isReason, setIsReason] = useState(changeReason);
+    const [isComment, setIsComment] = useState(editComment);
+    const [isEditEnd, setIsEditEnd] = useState(false);
+    const [valueFeedback, setValueFeedback] = useState('');
 
-    const optionalValues = [link, taskDescription, image, video, changeReason];
-    const statusFunctions = [setIsLink, setIsDescription, setIsImage, setIsVideo, setIsReason];
-    
+    const optionalValues = [link, taskDescription, image, video, changeReason, editComment];
+    const statusFunctions = [setIsLink, setIsDescription, setIsImage, setIsVideo, 
+        setIsReason, setIsComment];
+
+    async function sendData(dataFeedback, dataStatus) {
+        setIsEditEnd(false);
+        const teamId = "group51";
+        const baseURL = "https://rs-react-schedule.firebaseapp.com/api";
+        const obj = { 
+            ...dataTask, 
+            name: taskTitle, 
+            saveLastChange: lastChange, 
+            saveChangeReason: changeReason, 
+            description: taskDescription, 
+            descriptionUrl: link, 
+            isFavorite: status, 
+            dateTime: time, 
+            saveImage: image, 
+            type: taskType,
+            saveFeedback: feedback, 
+            saveVideo: video, 
+            saveLatitude: latitude, 
+            saveLongitude: longitude, 
+            comment: editComment,
+            allFeedbacks: allFeedbacksText,
+            saveColorText: colorText,
+            saveColorBackground: colorBackground,
+        };
+        const { id } = obj;
+        if(dataFeedback) {
+            obj.allFeedbacks = dataFeedback;
+        }
+        if (dataStatus) {
+            obj.isFavorite = dataStatus;
+        }
+        delete obj.data;
+        delete obj.index;
+        delete obj.user;
+        await updateExistingEventByID(baseURL, teamId, obj, id);
+    }
+
     function saveData() {
-        currentTaskTitle = taskTitle;
-        currentLastChange = lastChange;
-        currentChangeReason = changeReason;
-        currentTaskDescription = taskDescription;
-        currentLink = link;
-        currentType = taskType;
-        currentTime = time;
-        currentImage = image;
-        currentFeedback = feedback;
-        currentVideo = video;
-        currentLatitude = latitude;
-        currentLongitude = longitude;
-        currentColorText = colorText;
-        currentColorBackground = colorBackground;
-        currentIsFavorite = status;
         setLastChange(moment().format('YYYY-MM-DD HH:mm'));
         setIsEdit(!isEdit);
         optionalValues.forEach((value, index) => {
-            if(!value.trim()) {
+            if(!value || !value.trim()) {
                 statusFunctions[index]("");
             }
         });
         if (latitude === 0 && longitude === 0) {
             setIsMap(false);
         }
+        setIsEditEnd(true);
     }
 
     function changeStatus() {
         if(!isEdit) {
             setStatus(!status);
         }
+        sendData(null, !status);
+    }
+
+    function savingFeedback() {
+        sendData(allFeedbacksText.concat(valueFeedback));
+        setAllFeedbacksText(allFeedbacksText.concat(valueFeedback));
+        setValueFeedback('');
     }
 
     return (
@@ -170,6 +197,17 @@ const ChangeTaskCard = ({ dataTask }) => {
                             </Button>
                     }
                 </div>
+                <AdditionItem 
+                    title="Комментарий"
+                    status={isComment}
+                    text="комментарий"
+                    isEdit={isEdit}
+                    value={editComment}
+                    changeValue={setEditComment}
+                    changeStatus={setIsComment}
+                    placeholder="Поле для комментария"
+                    type="comment"
+                />
                 <AdditionItem
                     status={isDescription}
                     title='Описание'
@@ -231,22 +269,35 @@ const ChangeTaskCard = ({ dataTask }) => {
                         <Input.TextArea
                             placeholder="поле для feedback"
                             autoSize='true'
+                            value={valueFeedback}
+                            onChange={(event) => setValueFeedback(event.target.value)}
                         />
+                        <Button onClick={() => savingFeedback()}>оставить feedback</Button>
+                        { allFeedbacksText.length > 0 && 
+                            <div>
+                                <Button type="button" onClick={() => setShowModal(true)}>
+                                    посмотреть feedback
+                                </Button>
+                                <Modal
+                                    visible={showModal}
+                                    onCancel={() => setShowModal(false)}
+                                    width="fit-content"
+                                    closable="false"
+                                    style={{ top: 10, left: 0 }}
+                                >
+                                
+                                { allFeedbacksText.map((value) => <p>{value}</p>) }
+                                </Modal>
+                            </div>
+                        }
                     </div>
                 }
             </div>
             <div className="buttons">
-                <p>Пользователь: {user}</p>
-            {
-                isEdit === false &&
-                <Button onClick={() => setUser(user === "student" ? "mentor" : "student")}>
-                    сменить пользователя
-                </Button>
-            }
             {isEdit === true ? (
                     <div>
                         <Button onClick={() => saveData()}>
-                            Сохранить задание
+                            Завершить редактирование
                         </Button>
                         <Button onClick={() => setFeedback(!feedback)}>
                             {feedback === false ? 'разрешить оставлять feedback' : 'запретить оставлять feedback'}
@@ -258,6 +309,12 @@ const ChangeTaskCard = ({ dataTask }) => {
                         Редактировать задание
                     </Button>
                 )
+            }
+            {
+                isEditEnd && 
+                <Button onClick={() => sendData()}>
+                    Сохранить задание
+                </Button>
             }
             </div>
         </div>
@@ -280,18 +337,13 @@ ChangeTaskCard.propTypes = {
         saveLatitude: PropTypes.number,
         saveLongitude: PropTypes.number,
         saveColorBackground: PropTypes.string,
+        comment: PropTypes.string,
+        user: PropTypes.string,
     }),
 };
 
 ChangeTaskCard.defaultProps = {
     dataTask: defaultData,
-}
-
-export function sendData() {
-    return { currentTaskTitle, currentLastChange, currentChangeReason, 
-        currentTaskDescription, currentLink, currentIsFavorite, currentType, 
-        currentTime, currentFeedback, currentVideo, currentLatitude, currentLongitude,
-        currentColorText, currentColorBackground  };
 }
 
 export default ChangeTaskCard;
