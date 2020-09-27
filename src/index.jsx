@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, Dropdown, Menu, Checkbox } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
 import './index.scss';
 import 'antd/dist/antd.css';
@@ -21,6 +22,28 @@ function App() {
 	const [data, setData] = useState(null);
 	const [user, setUser] = useState("student");
 	const [showModal, setShowModal] = useState(false);
+	const [visibleColumns, setVisibleColumns] = useState(columns.map(() => true));
+
+	function changeVisibleMenu(index) {
+		visibleColumns[index] = !visibleColumns[index];
+		setVisibleColumns(visibleColumns);
+	}
+
+	const menu = (
+		<Menu>
+			{columns.map((column, index) => {
+			   		return <Menu.Item>
+						   		<Checkbox
+									checked={visibleColumns[index]}
+									onChange={() => changeVisibleMenu(index)}
+								>
+									{column.title}
+								</Checkbox>
+						   </Menu.Item>
+				})
+			}
+		</Menu>
+	  );
 
 	async function logEvents() {
 		const events = await getAllEvents(baseURL, teamId);
@@ -44,9 +67,26 @@ function App() {
 	}
 	logEvents();
 
+	function changeColumns(dataColumn) {
+		const newDataColumn = [];
+		for (let i = 0; i < dataColumn.length; i += 1) {
+			if (visibleColumns[i]) {
+				newDataColumn.push(dataColumn[i]);
+			}
+		}
+		return newDataColumn;
+	}
+
 	return (
 		<div> 
 			<div className="user">
+				<div style={{marginRight: "20px"}}>
+					<Dropdown overlay={menu}>
+						<span>
+						Изменить видимость колонок<DownOutlined />
+						</span>
+					</Dropdown>
+				</div>
 				<div>
 					<p>Пользователь: {user}</p>
 					<Button onClick={() => setUser(user === "student" ? "mentor" : "student")}>
@@ -74,7 +114,7 @@ function App() {
 			{ data &&
 			<Table 
 				dataSource={data} 
-				columns={columns} 
+				columns={changeColumns(columns)} 
 			/>
 			}
 		</div>
