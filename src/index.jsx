@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
-import { Table, Button } from 'antd';
+import { Table, Button, Modal } from 'antd';
 
 import './index.scss';
 import 'antd/dist/antd.css';
@@ -11,6 +11,7 @@ import 'regenerator-runtime/runtime';
 
 import columns from './components/tableComponents/columns';
 import getAllEvents  from './actions/httpRequests/getAllEvents';
+import ChangeTaskCard from "./components/changeTaskCard/changeTaskCard";
 
 const teamId = "group51";
 const baseURL = "https://rs-react-schedule.firebaseapp.com/api";
@@ -19,6 +20,7 @@ function App() {
 
 	const [data, setData] = useState(null);
 	const [user, setUser] = useState("student");
+	const [showModal, setShowModal] = useState(false);
 
 	async function logEvents() {
 		const events = await getAllEvents(baseURL, teamId);
@@ -52,6 +54,23 @@ function App() {
 					</Button>
 				</div>
 			</div>
+			{ user === "mentor" && 
+			<div>
+				<Button type="button" onClick={() => setShowModal(!showModal)}>
+					Добавить новую карточку
+				</Button>
+				<Modal
+					visible={showModal}
+					onOk={() => setShowModal(!showModal)}
+					onCancel={() => setShowModal(!showModal)}
+					width="fit-content"
+					closable="false"
+					style={{ top: 10, left: 0 }}
+				>
+					<ChangeTaskCard dataTask={{user}}/>
+				</Modal>
+			</div>
+			}
 			{ data &&
 			<Table 
 				dataSource={data} 
